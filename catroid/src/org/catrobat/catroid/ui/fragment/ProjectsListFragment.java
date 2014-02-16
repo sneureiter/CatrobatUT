@@ -47,6 +47,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -327,6 +328,7 @@ public class ProjectsListFragment extends SherlockListFragment implements OnProj
 
 	@Override
 	public void onProjectEdit(int position) {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_MY_PROJECTS_ACTIVITY_PROJECT_SELECTED);
 		LoadProjectTask loadProjectTask = new LoadProjectTask(getActivity(), (adapter.getItem(position)).projectName,
 				true, true);
 		loadProjectTask.setOnLoadProjectCompleteListener(parentFragment);

@@ -48,6 +48,7 @@ public class ProgramMenuActivity extends BaseActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 
 		Bundle bundle = getIntent().getExtras();

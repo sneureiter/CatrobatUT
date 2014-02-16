@@ -95,4 +95,39 @@ public final class Constants {
 	private Constants() {
 		throw new AssertionError();
 	}
+
+	//MainMenuActivity
+	public static String UMS_MAIN_MENU_ACTIVITY_NEW = "MainMenuActivity_New";
+	public static String UMS_MAIN_MENU_ACTIVITY_CONTINUE = "MainMenuActivity_Continue";
+	public static String UMS_MAIN_MENU_ACTIVITY_PROGRAMS = "MainMenuActivity_Programs";
+	public static String UMS_MAIN_MENU_ACTIVITY_HELP = "MainMenuActivity_Help";
+	public static String UMS_MAIN_MENU_ACTIVITY_EXPLORE = "MainMenuActivity_Explore";
+	public static String UMS_MAIN_MENU_ACTIVITY_UPLOAD = "MainMenuActivity_Upload";
+	public static String UMS_MAIN_MENU_ACTIVITY_RATE_US = "MainMenuActivity_Rate_Us";
+	public static String UMS_MAIN_MENU_ACTIVITY_ABOUT = "MainMenuActivity_About";
+	public static String UMS_MAIN_MENU_ACTIVITY_SETTINGS = "MainMenuActivity_Settings";
+
+	//ProjectActivity
+	public static String UMS_PROJECT_ACTIVITY_ADD_BUTTON = "ProjectActivityAddButton";
+	public static String UMS_PROJECT_ACTIVITY_PLAY_BUTTON = "ProjectActivityPlayButton";
+	public static String UMS_PROJECT_ACTIVITY_COPY_MENU = "ProjectActivityCopyMenu";
+	public static String UMS_PROJECT_ACTIVITY_RENAME_MENU = "ProjectActivityRenameMenu";
+	public static String UMS_PROJECT_ACTIVITY_DELETE_MENU = "ProjectActivityDeleteMenu";
+	public static String UMS_PROJECT_ACTIVITY_SHOW_DETAILS_MENU = "ProjectActivityShowDetailsMenu";
+	public static String UMS_PROJECT_ACTIVITY_UPLOAD_MENU = "ProjectActivityUploadMenu";
+
+	//MainMenuActivityNewProjectDialog
+
+	public static String UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_OK_BUTTON = "NewProjectDialogOkButton";
+	public static String UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CANCEL_BUTTON = "NewProjectDialogCancelButton";
+
+	//MyProjectsActivity +  ProjectsListFragment
+	public static String UMS_MY_PROJECTS_ACTIVITY_ADD_BUTTON = "MyProjectsActivityAddButton";
+	public static String UMS_MY_PROJECTS_ACTIVITY_PROJECT_SELECTED = "MyProjectsActivityProjectSelected";
+	public static String UMS_MY_PROJECTS_ACTIVITY_COPY_MENU = "MyProjectsActivityCopyMenu";
+	public static String UMS_MY_PROJECTS_ACTIVITY_RENAME_MENU = "MyProjectsActivityRenameMenu";
+	public static String UMS_MY_PROJECTS_ACTIVITY_DELETE_MENU = "MyProjectsActivityDeleteMenu";
+	public static String UMS_MY_PROJECTS_ACTIVITY_SHOW_DETAILS_MENU = "MyProjectsActivityShowDetailsMenu";
+	public static String UMS_MY_PROJECTS_ACTIVITY_UPLOAD_MENU = "MyProjectsActivityUploadMenu";
+
 }

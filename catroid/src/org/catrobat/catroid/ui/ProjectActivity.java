@@ -33,9 +33,11 @@ import android.view.View;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.formulaeditor.SensorHandler;
 import org.catrobat.catroid.stage.PreStageActivity;
 import org.catrobat.catroid.stage.StageActivity;
@@ -90,6 +92,7 @@ public class ProjectActivity extends BaseActivity {
 				break;
 
 			case R.id.copy:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_COPY_MENU);
 				spritesListFragment.startCopyActionMode();
 				break;
 
@@ -103,14 +106,17 @@ public class ProjectActivity extends BaseActivity {
 				break;
 
 			case R.id.rename:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_RENAME_MENU);
 				spritesListFragment.startRenameActionMode();
 				break;
 
 			case R.id.delete:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_DELETE_MENU);
 				spritesListFragment.startDeleteActionMode();
 				break;
 
 			case R.id.upload:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_UPLOAD_MENU);
 				ProjectManager.getInstance().uploadProject(Utils.getCurrentProjectName(this), this);
 				break;
 
@@ -145,6 +151,7 @@ public class ProjectActivity extends BaseActivity {
 	}
 
 	public void handleAddButton(View view) {
+		UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_ADD_BUTTON);
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
@@ -159,6 +166,8 @@ public class ProjectActivity extends BaseActivity {
 	}
 
 	public void handlePlayButton(View view) {
+		UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_PLAY_BUTTON);
+
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}

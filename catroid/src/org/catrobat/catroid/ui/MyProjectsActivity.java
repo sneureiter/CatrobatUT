@@ -30,8 +30,10 @@ import android.view.View;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.ui.adapter.ProjectAdapter;
 import org.catrobat.catroid.ui.dialogs.NewProjectDialog;
 import org.catrobat.catroid.ui.fragment.ProjectsListFragment;
@@ -81,18 +83,22 @@ public class MyProjectsActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.copy:
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_COPY_MENU);
 				projectsListFragment.startCopyActionMode();
 				break;
 
 			case R.id.delete:
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_DELETE_MENU);
 				projectsListFragment.startDeleteActionMode();
 				break;
 
 			case R.id.rename:
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_RENAME_MENU);
 				projectsListFragment.startRenameActionMode();
 				break;
 
 			case R.id.show_details:
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_COPY_MENU);
 				handleShowDetails(!projectsListFragment.getShowDetails(), item);
 				break;
 
@@ -118,6 +124,7 @@ public class MyProjectsActivity extends BaseActivity {
 	}
 
 	public void handleAddButton(View view) {
+		UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_ADD_BUTTON);
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}

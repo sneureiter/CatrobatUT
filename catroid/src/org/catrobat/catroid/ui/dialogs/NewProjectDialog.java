@@ -44,6 +44,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -75,10 +77,12 @@ public class NewProjectDialog extends DialogFragment {
 				.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+
 					}
 				}).setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CANCEL_BUTTON);
 					}
 				}).create();
 
@@ -137,7 +141,7 @@ public class NewProjectDialog extends DialogFragment {
 	protected void handleOkButtonClick() {
 		String projectName = newProjectEditText.getText().toString().trim();
 		boolean shouldBeEmpty = emptyProjectCheckBox.isChecked();
-
+		UmsAgent.onEvent(getActivity(), Constants.UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_OK_BUTTON);
 		if (projectName.isEmpty()) {
 			Utils.showErrorDialog(getActivity(), R.string.error_no_name_entered);
 			return;

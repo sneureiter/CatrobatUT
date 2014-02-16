@@ -42,6 +42,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -72,6 +73,17 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/*
+		 * Initilize Cobub Razor
+		 */
+		UmsAgent.setBaseURL("http://razor.sneureiter.net/index.php?");
+		UmsAgent.update(this);
+		UmsAgent.setUpdateOnlyWifi(false);
+		UmsAgent.onError(this);
+		UmsAgent.setDefaultReportPolicy(this, 1);
+		UmsAgent.bindUserIdentifier(this, "xd..");
+		UmsAgent.onEvent(MainMenuActivity.this, "test1");
+
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
 		}
@@ -101,7 +113,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		UmsAgent.onResume(this);
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
 		}
@@ -120,6 +132,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	@Override
 	public void onPause() {
 		super.onPause();
+		UmsAgent.onPause(this);
 		if (!Utils.externalStorageAvailable()) {
 			return;
 		}
@@ -144,6 +157,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 				launchMarket();
 				return true;
 			case R.id.menu_about:
+				UmsAgent.onEvent(MainMenuActivity.this, "test2");
 				AboutDialogFragment aboutDialog = new AboutDialogFragment();
 				aboutDialog.show(getSupportFragmentManager(), AboutDialogFragment.DIALOG_FRAGMENT_TAG);
 				return true;
@@ -195,12 +209,14 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		}
 		NewProjectDialog dialog = new NewProjectDialog();
 		dialog.show(getSupportFragmentManager(), NewProjectDialog.DIALOG_FRAGMENT_TAG);
+		UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_NEW);
 	}
 
 	public void handleProgramsButton(View view) {
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_PROGRAMS);
 		Intent intent = new Intent(MainMenuActivity.this, MyProjectsActivity.class);
 		startActivity(intent);
 	}
@@ -209,6 +225,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_HELP);
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.CATROBAT_HELP_URL));
 		startActivity(browserIntent);
 	}
@@ -217,7 +234,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
-
+		UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_EXPLORE);
 		// TODO just a quick fix for not properly working webview on old devices
 		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
 			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -271,6 +288,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_UPLOAD);
 		ProjectManager.getInstance().uploadProject(Utils.getCurrentProjectName(this), this);
 	}
 

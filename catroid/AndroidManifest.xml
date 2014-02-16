@@ -45,6 +45,14 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    
+    <!-- Permissions for Cobub Razor analytics -->
+    
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>           
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>           
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>           
+	<uses-permission android:name="android.permission.GET_TASKS"/>           
+	<uses-permission android:name="android.permission.READ_LOGS"/>           
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -153,6 +161,9 @@
 
         <service android:name=".transfers.ProjectUploadService" />
         <service android:name=".transfers.ProjectDownloadService" />
+        <!--  Cobub Razor app key -->
+        <meta-data android:name="UMS_APPKEY" android:value="375cc19f1148b6fda5d162bfb7cff40c"/>           
+        
     </application>
 
 </manifest>

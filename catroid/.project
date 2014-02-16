@@ -3,6 +3,8 @@
 	<name>catroid</name>
 	<comment></comment>
 	<projects>
+		<project>CobubRazorAndroidSDK</project>
+		<project>com_actionbarsherlock</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
