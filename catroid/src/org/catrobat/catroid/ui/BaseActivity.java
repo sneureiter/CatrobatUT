@@ -23,17 +23,33 @@
 package org.catrobat.catroid.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.ui.controller.BackPackListManager;
 
 public class BaseActivity extends SherlockFragmentActivity {
+
+	private GestureDetectorCompat mDetector;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+	}
 
 	@Override
 	protected void onDestroy() {
@@ -74,6 +90,30 @@ public class BaseActivity extends SherlockFragmentActivity {
 				unbindDrawables(((ViewGroup) view).getChildAt(i));
 			}
 			((ViewGroup) view).removeAllViews();
+		}
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+
+		Toast t = Toast.makeText(getApplicationContext(), getClass().getSimpleName(), Toast.LENGTH_SHORT);
+		t.show();
+		this.mDetector.onTouchEvent(ev);
+
+		return super.dispatchTouchEvent(ev);
+	}
+
+	class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+		@Override
+		public boolean onDown(MotionEvent event) {
+			UmsAgent.onTouchEvent(getBaseContext(), event.getX(), event.getY(), "Shortpress");
+			return true;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent event) {
+			UmsAgent.onTouchEvent(getBaseContext(), event.getX(), event.getY(), "Longpress");
 		}
 	}
 
