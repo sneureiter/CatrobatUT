@@ -30,9 +30,11 @@ import android.widget.Button;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.formulaeditor.SensorHandler;
 import org.catrobat.catroid.stage.PreStageActivity;
 import org.catrobat.catroid.stage.StageActivity;
@@ -107,6 +109,7 @@ public class ProgramMenuActivity extends BaseActivity {
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(ProgramMenuActivity.this, Constants.UMS_PROGRAM_MENU_ACTIVITY_SCRIPTS_BUTTON);
 		startScriptActivity(ScriptActivity.FRAGMENT_SCRIPTS);
 	}
 
@@ -114,6 +117,7 @@ public class ProgramMenuActivity extends BaseActivity {
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(ProgramMenuActivity.this, Constants.UMS_PROGRAM_MENU_ACTIVITY_LOOKS_BUTTON);
 		startScriptActivity(ScriptActivity.FRAGMENT_LOOKS);
 	}
 
@@ -121,6 +125,7 @@ public class ProgramMenuActivity extends BaseActivity {
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(ProgramMenuActivity.this, Constants.UMS_PROGRAM_MENU_ACTIVITY_SOUNDS_BUTTON);
 		startScriptActivity(ScriptActivity.FRAGMENT_SOUNDS);
 	}
 
@@ -128,6 +133,7 @@ public class ProgramMenuActivity extends BaseActivity {
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(ProgramMenuActivity.this, Constants.UMS_PROGRAM_MENU_ACTIVITY_PLAY_BUTTON);
 		ProjectManager.getInstance().getCurrentProject().getUserVariables().resetAllUserVariables();
 		Intent intent = new Intent(this, PreStageActivity.class);
 		startActivityForResult(intent, PreStageActivity.REQUEST_RESOURCES_INIT);

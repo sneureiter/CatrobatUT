@@ -25,7 +25,10 @@ package org.catrobat.catroid.ui.dialogs;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.ui.fragment.ProjectsListFragment;
 import org.catrobat.catroid.utils.CopyProjectTask;
 import org.catrobat.catroid.utils.Utils;
@@ -63,6 +66,7 @@ public class CopyProjectDialog extends TextDialog {
 
 	@Override
 	protected boolean handleOkButton() {
+		UmsAgent.onEvent(getActivity().getApplicationContext(), Constants.UMS_DIALOG_COPY_PROJECT_DIALOG_OK);
 		String newProjectName = (input.getText().toString()).trim();
 
 		if (newProjectName.equalsIgnoreCase("")) {

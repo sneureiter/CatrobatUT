@@ -30,7 +30,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -96,8 +95,8 @@ public class BaseActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 
-		Toast t = Toast.makeText(getApplicationContext(), getClass().getSimpleName(), Toast.LENGTH_SHORT);
-		t.show();
+		//Toast t = Toast.makeText(getApplicationContext(), getClass().getSimpleName(), Toast.LENGTH_SHORT);
+		//t.show();
 		this.mDetector.onTouchEvent(ev);
 
 		return super.dispatchTouchEvent(ev);

@@ -63,6 +63,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -480,6 +481,8 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	}
 
 	public void addLookFromCamera() {
+		UmsAgent.onEvent(getActivity().getBaseContext(),
+				Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_ADD_LOOK_FROM_CAMERA);
 		lookFromCameraUri = UtilCamera.getDefaultLookFromCameraUri(getString(R.string.default_look_name));
 
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -490,6 +493,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	}
 
 	public void addLookDrawNewImage() {
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_DRAW_NEW_IMAGE);
 		Intent intent = new Intent("android.intent.action.MAIN");
 		intent.setComponent(new ComponentName(Constants.POCKET_PAINT_PACKAGE_NAME,
 				Constants.POCKET_PAINT_INTENT_ACTIVITY_NAME));
@@ -509,6 +513,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	}
 
 	public void addLookChooseImage() {
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_CHOOSE_IMAGE);
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 
 		Bundle bundleForPocketCode = new Bundle();
@@ -585,6 +590,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_NEW_LOOK_DIALOG);
 		NewLookDialog dialog = new NewLookDialog();
 		dialog.showDialog(getActivity().getSupportFragmentManager(), this);
 	}
@@ -650,6 +656,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
 				selectedLookPosition = position;
 				return false;
 			}
@@ -657,6 +664,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	}
 
 	private void handleEditLook(View view) {
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_EDIT_LOOK);
 		int position = (Integer) view.getTag();
 		Intent intent = new Intent("android.intent.action.MAIN");
 		intent.setComponent(new ComponentName(Constants.POCKET_PAINT_PACKAGE_NAME,

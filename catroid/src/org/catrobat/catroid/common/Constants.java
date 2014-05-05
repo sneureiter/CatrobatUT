@@ -130,4 +130,35 @@ public final class Constants {
 	public static String UMS_MY_PROJECTS_ACTIVITY_SHOW_DETAILS_MENU = "MyProjectsActivityShowDetailsMenu";
 	public static String UMS_MY_PROJECTS_ACTIVITY_UPLOAD_MENU = "MyProjectsActivityUploadMenu";
 
+	//ProgramMenuActivity
+	public static String UMS_PROGRAM_MENU_ACTIVITY_SCRIPTS_BUTTON = "ProgramMenuActivityScriptsButton";
+	public static String UMS_PROGRAM_MENU_ACTIVITY_LOOKS_BUTTON = "ProgramMenuActivityLooksButton";
+	public static String UMS_PROGRAM_MENU_ACTIVITY_SOUNDS_BUTTON = "ProgramMenuActivitySoundsButton";
+	public static String UMS_PROGRAM_MENU_ACTIVITY_PLAY_BUTTON = "ProgramMenuActivityPlayButton";
+
+	//ScriptActivity - Look Fragment
+
+	public static String UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_NEW_LOOK_DIALOG = "ScriptActivityLookFragmentNewLookDialogButton";
+	public static String UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_PLAY_BUTTON = "ScriptActivityLookFragmentPlayButton";
+	public static String UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_ADD_LOOK_FROM_CAMERA = "ScriptActivityLookFragmentAddLookFromCamera";
+	public static String UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_DRAW_NEW_IMAGE = "ScriptActivityLookFragmentAddLookDrawNewImage";
+	public static String UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_EDIT_LOOK = "ScriptActivityLookFragmentAddLookFromCamera";
+	public static String UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_CHOOSE_IMAGE = "ScriptActivityLookFragmentAddLookChooseImage";
+
+	//ScriptActivity - Sound Fragment
+
+	public static String UMS_SCRIPT_ACTIVITY_SOUND_FRAGMENT_NEW_SOUND_DIALOG = "ScriptActivitySoundFragmentNewSoundDialogButton";
+	public static String UMS_SCRIPT_ACTIVITY_SOUND_FRAGMENT_PLAY_Button = "ScriptActivitySoundFragmentPlayButton";
+	public static String UMS_SCRIPT_ACTIVITY_SOUND_FRAGMENT_PLAY_SOUND = "ScriptActivitySoundFragmentPlaySound";
+
+	//Dialogs
+
+	public static String UMS_DIALOG_ABOUT_DIALOG_OK = "AboutDialogOk";
+	public static String UMS_DIALOG_COPY_PROJECT_DIALOG_OK = "CopyProjectDialogOk";
+	public static String UMS_DIALOG_COPY_PROJECT_DIALOG_CANCEL = "CopyProjectDialogCancel";
+	public static String UMS_DIALOG_DELETE_LOOK_DIALOG_YES = "DeleteLookDialogYes";
+	public static String UMS_DIALOG_DELETE_LOOK_DIALOG_NO = "DeleteLookDialogNo";
+	public static String UMS_DIALOG_DELETE_SOUND_DIALOG_YES = "DeleteSoundDialogYes";
+	public static String UMS_DIALOG_DELETE_SOUND_DIALOG_NO = "DeleteSoundDialogNo";
+
 }
