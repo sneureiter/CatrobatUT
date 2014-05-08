@@ -2,21 +2,21 @@
  *  Catroid: An on-device visual programming system for Android devices
  *  Copyright (C) 2010-2013 The Catrobat Team
  *  (<http://developer.catrobat.org/credits>)
- *  
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
  *  published by the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
- *  
+ *
  *  An additional term exception under section 7 of the GNU Affero
  *  General Public License, version 3, is available at
  *  http://developer.catrobat.org/license_additional_term
- *  
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  *  GNU Affero General Public License for more details.
- *  
+ *
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -133,6 +133,7 @@ public final class StorageHandler {
 	private XStream xstream;
 
 	private File backPackSoundDirectory;
+	private FileInputStream fileInputStream;
 
 	private Lock loadSaveLock = new ReentrantLock();
 
@@ -157,6 +158,26 @@ public final class StorageHandler {
 			throw new IOException("Could not read external storage");
 		}
 		createCatroidRoot();
+	}
+
+	public static StorageHandler getInstance() {
+		return INSTANCE;
+	}
+
+	public static void saveBitmapToImageFile(File outputFile, Bitmap bitmap) throws FileNotFoundException {
+		FileOutputStream outputStream = new FileOutputStream(outputFile);
+		try {
+			if (outputFile.getName().toLowerCase(Locale.US).endsWith(".jpg")
+					|| outputFile.getName().toLowerCase(Locale.US).endsWith(".jpeg")) {
+				bitmap.compress(CompressFormat.JPEG, JPG_COMPRESSION_SETTING, outputStream);
+			} else {
+				bitmap.compress(CompressFormat.PNG, 0, outputStream);
+			}
+			outputStream.flush();
+			outputStream.close();
+		} catch (IOException ioException) {
+			Log.e(TAG, Log.getStackTraceString(ioException));
+		}
 	}
 
 	private void setXstreamAliases() {
@@ -232,10 +253,6 @@ public final class StorageHandler {
 		}
 	}
 
-	public static StorageHandler getInstance() {
-		return INSTANCE;
-	}
-
 	public File getBackPackSoundDirectory() {
 		return backPackSoundDirectory;
 	}
@@ -244,13 +261,33 @@ public final class StorageHandler {
 		loadSaveLock.lock();
 		try {
 			File projectCodeFile = new File(buildProjectPath(projectName), PROJECTCODE_NAME);
-			return (Project) xstream.fromXML(new FileInputStream(projectCodeFile));
+			fileInputStream = new FileInputStream(projectCodeFile);
+			return (Project) xstream.fromXML(fileInputStream);
 		} catch (Exception exception) {
 			Log.e(TAG, "Loading project " + projectName + " failed.", exception);
 			return null;
 		} finally {
+			if (fileInputStream != null) {
+				try {
+					fileInputStream.close();
+				} catch (IOException ioException) {
+					Log.e(TAG, "can't close fileStream.", ioException);
+				}
+			}
 			loadSaveLock.unlock();
 		}
+	}
+
+	public boolean cancelLoadProject() {
+		if (fileInputStream != null) {
+			try {
+				fileInputStream.close();
+				return true;
+			} catch (IOException ioException) {
+				Log.e(TAG, "can't close fileStream.", ioException);
+			}
+		}
+		return false;
 	}
 
 	public boolean saveProject(Project project) {
@@ -416,8 +453,12 @@ public final class StorageHandler {
 		}
 
 		Project project = ProjectManager.getInstance().getCurrentProject();
-		if ((imageDimensions[0] <= project.getXmlHeader().virtualScreenWidth)
-				&& (imageDimensions[1] <= project.getXmlHeader().virtualScreenHeight)) {
+
+		if ((imageDimensions[0] > project.getXmlHeader().virtualScreenWidth)
+				&& (imageDimensions[1] > project.getXmlHeader().virtualScreenHeight)) {
+			File outputFile = new File(buildPath(imageDirectory.getAbsolutePath(), inputFile.getName()));
+			return copyAndResizeImage(outputFile, inputFile, imageDirectory);
+		} else {
 			String checksumSource = Utils.md5Checksum(inputFile);
 
 			if (newName != null) {
@@ -432,9 +473,6 @@ public final class StorageHandler {
 
 			File outputFile = new File(newFilePath);
 			return copyFileAddCheckSum(outputFile, inputFile, imageDirectory);
-		} else {
-			File outputFile = new File(buildPath(imageDirectory.getAbsolutePath(), inputFile.getName()));
-			return copyAndResizeImage(outputFile, inputFile, imageDirectory);
 		}
 	}
 
@@ -480,7 +518,9 @@ public final class StorageHandler {
 				checksumCompressedFile + "_" + inputFile.getName());
 
 		if (!fileChecksumContainer.addChecksum(checksumCompressedFile, newFilePath)) {
-			outputFile.delete();
+			if (!outputFile.getAbsolutePath().equalsIgnoreCase(inputFile.getAbsolutePath())) {
+				outputFile.delete();
+			}
 			return new File(fileChecksumContainer.getPath(checksumCompressedFile));
 		}
 
@@ -490,22 +530,6 @@ public final class StorageHandler {
 		return compressedFile;
 	}
 
-	public static void saveBitmapToImageFile(File outputFile, Bitmap bitmap) throws FileNotFoundException {
-		FileOutputStream outputStream = new FileOutputStream(outputFile);
-		try {
-			if (outputFile.getName().toLowerCase(Locale.US).endsWith(".jpg")
-					|| outputFile.getName().toLowerCase(Locale.US).endsWith(".jpeg")) {
-				bitmap.compress(CompressFormat.JPEG, JPG_COMPRESSION_SETTING, outputStream);
-			} else {
-				bitmap.compress(CompressFormat.PNG, 0, outputStream);
-			}
-			outputStream.flush();
-			outputStream.close();
-		} catch (IOException e) {
-
-		}
-	}
-
 	public void deleteFile(String filepath) {
 		FileChecksumContainer container = ProjectManager.getInstance().getFileChecksumContainer();
 		try {
@@ -513,8 +537,8 @@ public final class StorageHandler {
 				File toDelete = new File(filepath);
 				toDelete.delete();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException fileNotFoundException) {
+			Log.e(TAG, Log.getStackTraceString(fileNotFoundException));
 			//deleteFile(filepath);
 		}
 	}

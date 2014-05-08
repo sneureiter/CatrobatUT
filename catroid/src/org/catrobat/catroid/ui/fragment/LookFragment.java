@@ -42,6 +42,7 @@ import android.support.v4.content.Loader;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -514,7 +515,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 
 	public void addLookChooseImage() {
 		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_CHOOSE_IMAGE);
-		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		Intent intent = new Intent(Intent.ACTION_PICK);
 
 		Bundle bundleForPocketCode = new Bundle();
 		bundleForPocketCode.putString(Constants.EXTRA_PICTURE_PATH_POCKET_PAINT, "");
@@ -591,8 +592,8 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 			return;
 		}
 		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_NEW_LOOK_DIALOG);
-		NewLookDialog dialog = new NewLookDialog();
-		dialog.showDialog(getActivity().getSupportFragmentManager(), this);
+		NewLookDialog dialog = NewLookDialog.newInstance();
+		dialog.showDialog(this);
 	}
 
 	@Override
@@ -695,9 +696,8 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 
 			intent.addCategory("android.intent.category.LAUNCHER");
 			startActivityForResult(intent, LookController.REQUEST_POCKET_PAINT_EDIT_IMAGE);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException ioException) {
+			Log.e(TAG, Log.getStackTraceString(ioException));
 		}
 
 	}

@@ -2,21 +2,21 @@
  *  Catroid: An on-device visual programming system for Android devices
  *  Copyright (C) 2010-2013 The Catrobat Team
  *  (<http://developer.catrobat.org/credits>)
- *  
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
  *  published by the Free Software Foundation, either version 3 of the
  *  License, or (at your option) any later version.
- *  
+ *
  *  An additional term exception under section 7 of the GNU Affero
  *  General Public License, version 3, is available at
  *  http://developer.catrobat.org/license_additional_term
- *  
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  *  GNU Affero General Public License for more details.
- *  
+ *
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -47,12 +47,14 @@ import com.wbtech.ums.UmsAgent;
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
+import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.io.LoadProjectTask;
 import org.catrobat.catroid.io.LoadProjectTask.OnLoadProjectCompleteListener;
 import org.catrobat.catroid.stage.PreStageActivity;
 import org.catrobat.catroid.ui.controller.BackPackListManager;
 import org.catrobat.catroid.ui.dialogs.AboutDialogFragment;
 import org.catrobat.catroid.ui.dialogs.NewProjectDialog;
+import org.catrobat.catroid.ui.dialogs.TermsOfUseDialogFragment;
 import org.catrobat.catroid.utils.DownloadUtil;
 import org.catrobat.catroid.utils.StatusBarNotificationManager;
 import org.catrobat.catroid.utils.UtilFile;
@@ -120,6 +122,8 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 			return;
 		}
 
+		findViewById(R.id.progress_circle).setVisibility(View.GONE);
+
 		UtilFile.createStandardProjectIfRootDirectoryIsEmpty(this);
 		PreStageActivity.shutdownPersistentResources();
 		setMainMenuButtonContinueText();
@@ -139,10 +143,10 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 			return;
 		}
 
-		if (ProjectManager.getInstance().getCurrentProject() != null) {
+		Project currentProject = ProjectManager.getInstance().getCurrentProject();
+		if (currentProject != null) {
 			ProjectManager.getInstance().saveProject();
-			Utils.saveToPreferences(this, Constants.PREF_PROJECTNAME_KEY, ProjectManager.getInstance()
-					.getCurrentProject().getName());
+			Utils.saveToPreferences(this, Constants.PREF_PROJECTNAME_KEY, currentProject.getName());
 		}
 	}
 
@@ -157,6 +161,10 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		switch (item.getItemId()) {
 			case R.id.menu_rate_app:
 				launchMarket();
+				return true;
+			case R.id.menu_terms_of_use:
+				TermsOfUseDialogFragment termsOfUseDialog = new TermsOfUseDialogFragment();
+				termsOfUseDialog.show(getSupportFragmentManager(), TermsOfUseDialogFragment.DIALOG_FRAGMENT_TAG);
 				return true;
 			case R.id.menu_about:
 				UmsAgent.onEvent(MainMenuActivity.this, "test2");
@@ -185,7 +193,9 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	}
 
 	public void handleContinueButton() {
-		loadProjectInBackground(Utils.getCurrentProjectName(this));
+		Intent intent = new Intent(this, ProjectActivity.class);
+		intent.putExtra(Constants.PROJECTNAME_TO_LOAD, Utils.getCurrentProjectName(this));
+		startActivity(intent);
 	}
 
 	private void loadProjectInBackground(String projectName) {
@@ -215,6 +225,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	}
 
 	public void handleProgramsButton(View view) {
+		findViewById(R.id.progress_circle).setVisibility(View.VISIBLE);
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
@@ -237,6 +248,11 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 			return;
 		}
 		UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_EXPLORE);
+		startWebViewActivity(Constants.BASE_URL_HTTPS);
+
+	}
+
+	private void startWebViewActivity(String url) {
 		// TODO just a quick fix for not properly working webview on old devices
 		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
 			final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -249,8 +265,10 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 			}
 		} else {
 			Intent intent = new Intent(MainMenuActivity.this, WebViewActivity.class);
+			intent.putExtra(WebViewActivity.INTENT_PARAMETER_URL, url);
 			startActivity(intent);
 		}
+
 	}
 
 	private void showWebWarningDialog() {
@@ -325,5 +343,10 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 				spannableStringBuilder.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
 		mainMenuButtonContinue.setText(spannableStringBuilder);
+	}
+
+	@Override
+	public void onLoadProjectFailure() {
+
 	}
 }
