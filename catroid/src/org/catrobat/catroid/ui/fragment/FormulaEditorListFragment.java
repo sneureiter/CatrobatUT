@@ -40,6 +40,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.R;
 
@@ -93,6 +94,8 @@ public class FormulaEditorListFragment extends SherlockListFragment implements D
 				.findFragmentByTag(FormulaEditorFragment.FORMULA_EDITOR_FRAGMENT_TAG);
 		if (formulaEditor != null) {
 			formulaEditor.addResourceToActiveFormula(itemsIds[position]);
+			//Stefan Neureiter: Send the name of the string ressource to cobub razor
+			UmsAgent.onEvent(getActivity(), getResources().getString(itemsIds[position]));
 			formulaEditor.updateButtonViewOnKeyboard();
 		}
 		KeyEvent keyEvent = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK);

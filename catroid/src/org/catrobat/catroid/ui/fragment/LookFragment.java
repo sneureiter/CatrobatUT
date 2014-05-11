@@ -442,24 +442,30 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 
 		switch (item.getItemId()) {
 			case R.id.context_menu_copy:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY);
 				LookController.getInstance().copyLook(selectedLookPosition, lookDataList, getActivity(),
 						LookFragment.this);
 				break;
 
 			case R.id.context_menu_cut:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT);
 				break;
 
 			case R.id.context_menu_insert_below:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW);
 				break;
 
 			case R.id.context_menu_move:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE);
 				break;
 
 			case R.id.context_menu_rename:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME);
 				showRenameDialog();
 				break;
 
 			case R.id.context_menu_delete:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE);
 				showConfirmDeleteDialog();
 				break;
 
@@ -732,6 +738,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
+				UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_DELETE_LOOK_DIALOG_YES);
 				LookController.getInstance().deleteCheckedLooks(adapter, lookDataList, getActivity());
 				clearCheckedLooksAndEnableButtons();
 			}
@@ -739,6 +746,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
+				UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_DELETE_LOOK_DIALOG_NO);
 				dialog.cancel();
 				clearCheckedLooksAndEnableButtons();
 			}

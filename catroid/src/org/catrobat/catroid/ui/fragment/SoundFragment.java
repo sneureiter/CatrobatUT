@@ -65,6 +65,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -418,7 +419,6 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 				appendix = singleItemAppendixDeleteActionMode;
 			}
 
-
 			String numberOfItems = Integer.toString(numberOfSelectedItems);
 			String completeTitle = actionModeTitle + " " + numberOfItems + " " + appendix;
 
@@ -492,6 +492,7 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 		switch (item.getItemId()) {
 
 			case R.id.context_menu_backpack:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_BACKPACK);
 				Intent intent = new Intent(getActivity(), BackPackActivity.class);
 				intent.putExtra(BackPackActivity.EXTRA_FRAGMENT_POSITION, 2);
 				intent.putExtra(BackPackActivity.BACKPACK_ITEM, true);
@@ -501,6 +502,7 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 				break;
 
 			case R.id.context_menu_copy:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY);
 				SoundInfo newSoundInfo = SoundController.getInstance().copySound(selectedSoundInfo, soundInfoList,
 						adapter);
 				updateSoundAdapter(newSoundInfo);
@@ -508,19 +510,24 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 				break;
 
 			case R.id.context_menu_cut:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT);
 				break;
 
 			case R.id.context_menu_insert_below:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW);
 				break;
 
 			case R.id.context_menu_move:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE);
 				break;
 
 			case R.id.context_menu_rename:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME);
 				showRenameDialog();
 				break;
 
 			case R.id.context_menu_delete:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE);
 				showConfirmDeleteDialog();
 				break;
 		}
@@ -587,17 +594,17 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 	public void handleAddButton() {
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		intent.setType("audio/*");
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)	{
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			disableGoogleDrive(intent);
 		}
 		startActivityForResult(Intent.createChooser(intent, getString(R.string.sound_select_source)),
 				SoundController.REQUEST_SELECT_MUSIC);
 	}
 
-    @TargetApi(19)
-    private void disableGoogleDrive(Intent intent) {
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-    }
+	@TargetApi(19)
+	private void disableGoogleDrive(Intent intent) {
+		intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+	}
 
 	@Override
 	public void showRenameDialog() {

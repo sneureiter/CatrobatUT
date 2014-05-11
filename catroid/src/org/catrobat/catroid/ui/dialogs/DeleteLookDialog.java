@@ -29,11 +29,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import com.wbtech.ums.UmsAgent;
-
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
-import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.io.StorageHandler;
 import org.catrobat.catroid.ui.ScriptActivity;
@@ -63,14 +60,11 @@ public class DeleteLookDialog extends DialogFragment {
 				.setNegativeButton(R.string.cancel_button, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_DELETE_LOOK_DIALOG_NO);
-
 						dismiss();
 					}
 				}).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_DELETE_LOOK_DIALOG_YES);
 						handleDeleteLook(selectedPosition);
 					}
 				}).create();

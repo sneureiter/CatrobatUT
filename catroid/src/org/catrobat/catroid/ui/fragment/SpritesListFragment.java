@@ -50,6 +50,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -260,23 +261,29 @@ public class SpritesListFragment extends SherlockListFragment implements OnSprit
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.context_menu_copy:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY);
 				copySprite();
 				break;
 
 			case R.id.context_menu_cut:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT);
 				break;
 
 			case R.id.context_menu_insert_below:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW);
 				break;
 
 			case R.id.context_menu_move:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE);
 				break;
 
 			case R.id.context_menu_rename:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME);
 				showRenameDialog();
 				break;
 
 			case R.id.context_menu_delete:
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE);
 				showConfirmDeleteDialog();
 				break;
 

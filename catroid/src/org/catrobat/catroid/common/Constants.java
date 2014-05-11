@@ -161,4 +161,28 @@ public final class Constants {
 	public static String UMS_DIALOG_DELETE_SOUND_DIALOG_YES = "DeleteSoundDialogYes";
 	public static String UMS_DIALOG_DELETE_SOUND_DIALOG_NO = "DeleteSoundDialogNo";
 
+	//Optionsmenu
+
+	public static String UMS_OPTIONS_MENU_SHOW_DETAILS = "OptionsMenuShowDetails";
+	public static String UMS_OPTIONS_MENU_COPY = "OptionsMenuCopy";
+	public static String UMS_OPTIONS_MENU_CUT = "OptionsMenuCut";
+	public static String UMS_OPTIONS_MENU_INSERT_BELOW = "OptionsMenuInsertBelow";
+	public static String UMS_OPTIONS_MENU_MOVE = "OptionsMenuMove";
+	public static String UMS_OPTIONS_MENU_RENAME = "OptionsMenuRename";
+	public static String UMS_OPTIONS_MENU_DELETE = "OptionsMenuDelete";
+	public static String UMS_OPTIONS_MENU_UPLOAD = "OptionsMenuUpload";
+	public static String UMS_OPTIONS_MENU_UNPACKING = "OptionsMenuUnpacking";
+	public static String UMS_OPTIONS_MENU_BACKPACK = "OptionsMenuBackpack";
+
+	//Contextmenu
+	//public static String UMS_CONTEXT_MENU_SHOW_DETAILS = "OptionsMenuShowDetails";
+	public static String UMS_CONTEXT_MENU_COPY = "ContextMenuCopy";
+	public static String UMS_CONTEXT_MENU_CUT = "ContextMenuCut";
+	public static String UMS_CONTEXT_MENU_INSERT_BELOW = "ContextMenuInsertBelow";
+	public static String UMS_CONTEXT_MENU_MOVE = "ContextMenuMove";
+	public static String UMS_CONTEXT_MENU_RENAME = "ContextMenuRename";
+	public static String UMS_CONTEXT_MENU_DELETE = "ContextMenuDelete";
+	public static String UMS_CONTEXT_MENU_BACKPACK = "ContextMenuBackpack";
+	//public static String UMS_CONTEXT_MENU_UPLOAD = "OptionsMenuUpload";
+
 }

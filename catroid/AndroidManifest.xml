@@ -164,7 +164,7 @@
         <service android:name=".transfers.ProjectUploadService" />
         <service android:name=".transfers.ProjectDownloadService" />
         <!--  Cobub Razor app key -->
-        <meta-data android:name="UMS_APPKEY" android:value="375cc19f1148b6fda5d162bfb7cff40c"/>           
+        <meta-data android:name="UMS_APPKEY" android:value="97d70cda6d7e52eeadca44e978e1624b"/>           
         
     </application>
 

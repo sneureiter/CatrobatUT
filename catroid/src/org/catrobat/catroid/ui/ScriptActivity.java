@@ -37,9 +37,11 @@ import android.widget.ListAdapter;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.stage.PreStageActivity;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.ui.adapter.BrickAdapter;
@@ -210,39 +212,48 @@ public class ScriptActivity extends BaseActivity {
 
 		switch (item.getItemId()) {
 			case R.id.backpack:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_RENAME);
 				currentFragment.startBackPackActionMode();
 				break;
 
 			case R.id.show_details:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_SHOW_DETAILS);
 				handleShowDetails(!currentFragment.getShowDetails(), item);
 				break;
 
 			case R.id.copy:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_COPY);
 				currentFragment.startCopyActionMode();
 				break;
 
 			case R.id.cut:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_CUT);
 				break;
 
 			case R.id.unpacking:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_UNPACKING);
 				Intent intent = new Intent(currentFragment.getActivity(), BackPackActivity.class);
 				intent.putExtra(BackPackActivity.EXTRA_FRAGMENT_POSITION, FRAGMENT_SOUNDS);
 				startActivity(intent);
 				break;
 
 			case R.id.insert_below:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_INSERT_BELOW);
 				break;
 
 			case R.id.move:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_MOVE);
 				break;
 
 			case R.id.rename:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_RENAME);
 				if (currentFragmentPosition != FRAGMENT_SCRIPTS) {
 					currentFragment.startRenameActionMode();
 				}
 				break;
 
 			case R.id.delete:
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_DELETE);
 				currentFragment.startDeleteActionMode();
 				break;
 		}

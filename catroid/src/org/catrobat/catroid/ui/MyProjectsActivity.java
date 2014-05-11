@@ -83,22 +83,22 @@ public class MyProjectsActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.copy:
-				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_COPY_MENU);
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_OPTIONS_MENU_COPY);
 				projectsListFragment.startCopyActionMode();
 				break;
 
 			case R.id.delete:
-				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_DELETE_MENU);
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_OPTIONS_MENU_DELETE);
 				projectsListFragment.startDeleteActionMode();
 				break;
 
 			case R.id.rename:
-				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_RENAME_MENU);
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_OPTIONS_MENU_RENAME);
 				projectsListFragment.startRenameActionMode();
 				break;
 
 			case R.id.show_details:
-				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_MY_PROJECTS_ACTIVITY_COPY_MENU);
+				UmsAgent.onEvent(MyProjectsActivity.this, Constants.UMS_OPTIONS_MENU_SHOW_DETAILS);
 				handleShowDetails(!projectsListFragment.getShowDetails(), item);
 				break;
 
@@ -114,8 +114,8 @@ public class MyProjectsActivity extends BaseActivity {
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
-		if (projectsListFragment.getActionModeActive()
-				&& event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+		if (projectsListFragment.getActionModeActive() && event.getKeyCode() == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_UP) {
 			ProjectAdapter adapter = (ProjectAdapter) projectsListFragment.getListAdapter();
 			adapter.clearCheckedProjects();
 		}

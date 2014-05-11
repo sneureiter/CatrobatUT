@@ -78,15 +78,13 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		/*
 		 * Initilize Cobub Razor
 		 */
-		UmsAgent.setBaseURL("http://razor.sneureiter.net/index.php?");
+		UmsAgent.setBaseURL("http://logger.catrob.at/index.php?");
 		//UmsAgent.setBaseURL("http://razor.dev:8088/index.php?");
 		UmsAgent.update(this);
 		UmsAgent.setUpdateOnlyWifi(false);
 		UmsAgent.onError(this);
 		UmsAgent.setDefaultReportPolicy(this, 1);
 		UmsAgent.bindUserIdentifier(this, "xd..");
-		//UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_MAIN_MENU_ACTIVITY_NEW);
-		//
 
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;

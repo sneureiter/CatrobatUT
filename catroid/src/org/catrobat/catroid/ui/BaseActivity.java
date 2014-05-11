@@ -30,6 +30,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -94,24 +95,25 @@ public class BaseActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
-
-		//Toast t = Toast.makeText(getApplicationContext(), getClass().getSimpleName(), Toast.LENGTH_SHORT);
-		//t.show();
 		this.mDetector.onTouchEvent(ev);
-
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(getBaseContext(), this.getClass().getSimpleName().toString(), duration);
+		toast.show();
 		return super.dispatchTouchEvent(ev);
 	}
 
 	class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
 
 		@Override
-		public boolean onDown(MotionEvent event) {
+		public boolean onSingleTapConfirmed(MotionEvent event) {
 			UmsAgent.onTouchEvent(getBaseContext(), event.getX(), event.getY(), "Shortpress");
+
 			return true;
 		}
 
 		@Override
 		public void onLongPress(MotionEvent event) {
+
 			UmsAgent.onTouchEvent(getBaseContext(), event.getX(), event.getY(), "Longpress");
 		}
 	}

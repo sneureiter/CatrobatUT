@@ -98,35 +98,39 @@ public class ProjectActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.show_details:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_SHOW_DETAILS);
 				handleShowDetails(!spritesListFragment.getShowDetails(), item);
 				break;
 
 			case R.id.copy:
-				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_COPY_MENU);
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_COPY);
 				spritesListFragment.startCopyActionMode();
 				break;
 
 			case R.id.cut:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_CUT);
 				break;
 
 			case R.id.insert_below:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_INSERT_BELOW);
 				break;
 
 			case R.id.move:
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_MOVE);
 				break;
 
 			case R.id.rename:
-				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_RENAME_MENU);
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_RENAME);
 				spritesListFragment.startRenameActionMode();
 				break;
 
 			case R.id.delete:
-				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_DELETE_MENU);
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_DELETE);
 				spritesListFragment.startDeleteActionMode();
 				break;
 
 			case R.id.upload:
-				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_PROJECT_ACTIVITY_UPLOAD_MENU);
+				UmsAgent.onEvent(ProjectActivity.this, Constants.UMS_OPTIONS_MENU_UPLOAD);
 				ProjectManager.getInstance().uploadProject(Utils.getCurrentProjectName(this), this);
 				break;
 
@@ -185,8 +189,8 @@ public class ProjectActivity extends BaseActivity {
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		// Dismiss ActionMode without effecting sounds
-		if (spritesListFragment.getActionModeActive()
-				&& event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+		if (spritesListFragment.getActionModeActive() && event.getKeyCode() == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_UP) {
 			SpriteAdapter adapter = (SpriteAdapter) spritesListFragment.getListAdapter();
 			adapter.clearCheckedSprites();
 		}

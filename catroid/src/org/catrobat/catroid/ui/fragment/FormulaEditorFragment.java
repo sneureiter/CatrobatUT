@@ -50,6 +50,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -241,7 +242,8 @@ public class FormulaEditorFragment extends SherlockFragment implements OnKeyList
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
 					view.setPressed(true);
-
+					String ressourceEntryName = getResources().getResourceEntryName(view.getId());
+					UmsAgent.onEvent(getActivity(), ressourceEntryName);
 					switch (view.getId()) {
 						case R.id.formula_editor_keyboard_compute:
 							InternFormulaParser internFormulaParser = formulaEditorEditText.getFormulaParser();
