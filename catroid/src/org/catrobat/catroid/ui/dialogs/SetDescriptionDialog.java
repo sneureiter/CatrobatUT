@@ -24,8 +24,11 @@ package org.catrobat.catroid.ui.dialogs;
 
 import android.os.Bundle;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 
 public class SetDescriptionDialog extends MultiLineTextDialog {
 
@@ -70,6 +73,7 @@ public class SetDescriptionDialog extends MultiLineTextDialog {
 
 	@Override
 	protected boolean handleOkButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_SET_DESCRIPTION_DIALOG_OK);
 		String description = input.getText().toString();
 		String currentProjectName = projectManager.getCurrentProject().getName();
 
@@ -115,5 +119,16 @@ public class SetDescriptionDialog extends MultiLineTextDialog {
 
 		void onUpdateProjectDescription();
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.catrobat.catroid.ui.dialogs.MultiLineTextDialog#handleCancelButton()
+	 */
+	@Override
+	protected boolean handleCancelButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_SET_DESCRIPTION_DIALOG_CANCEL, "asdfsdafsdf", 0);
+		return false;
 	}
 }

@@ -124,6 +124,12 @@ public class SpeakBrick extends BrickBaseType {
 					protected String getTitle() {
 						return getString(R.string.dialog_edit_speak_title);
 					}
+
+					@Override
+					protected boolean handleCancelButton() {
+						// TODO Auto-generated method stub
+						return false;
+					}
 				};
 
 				editDialog.show(activity.getSupportFragmentManager(), "dialog_speak_brick");

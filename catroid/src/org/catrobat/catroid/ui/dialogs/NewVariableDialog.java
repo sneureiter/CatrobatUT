@@ -42,9 +42,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.formulaeditor.UserVariable;
 
 import java.util.ArrayList;
@@ -86,11 +88,13 @@ public class NewVariableDialog extends SherlockDialogFragment {
 				.setNegativeButton(R.string.cancel_button, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_NEW_VARIABLE_DIALOG_CANCEL);
 						dialog.cancel();
 					}
 				}).setPositiveButton(R.string.ok, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_NEW_VARIABLE_DIALOG_OK);
 						handleOkButton(dialogView);
 					}
 				}).create();
@@ -129,6 +133,7 @@ public class NewVariableDialog extends SherlockDialogFragment {
 		String variableName = variableNameEditText.getText().toString();
 		UserVariable newUserVariable = null;
 		if (globalVariable.isChecked()) {
+			UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_NEW_VARIABLE_DIALOG_GLOBAL_VARIABLE);
 			if (ProjectManager.getInstance().getCurrentProject().getUserVariables()
 					.getUserVariable(variableName, ProjectManager.getInstance().getCurrentSprite()) != null) {
 
@@ -139,6 +144,7 @@ public class NewVariableDialog extends SherlockDialogFragment {
 						.addProjectUserVariable(variableName);
 			}
 		} else if (localVariable.isChecked()) {
+			UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_NEW_VARIABLE_DIALOG_LOCAL_VARIABLE);
 			newUserVariable = ProjectManager.getInstance().getCurrentProject().getUserVariables()
 					.addSpriteUserVariable(variableName);
 		}

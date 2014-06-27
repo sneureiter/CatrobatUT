@@ -489,7 +489,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 
 	public void addLookFromCamera() {
 		UmsAgent.onEvent(getActivity().getBaseContext(),
-				Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_ADD_LOOK_FROM_CAMERA);
+				Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_ADD_LOOK_FROM_CAMERA, this.getTag(), 0);
 		lookFromCameraUri = UtilCamera.getDefaultLookFromCameraUri(getString(R.string.default_look_name));
 
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -500,7 +500,8 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	}
 
 	public void addLookDrawNewImage() {
-		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_DRAW_NEW_IMAGE);
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_DRAW_NEW_IMAGE,
+				this.getTag(), 0);
 		Intent intent = new Intent("android.intent.action.MAIN");
 		intent.setComponent(new ComponentName(Constants.POCKET_PAINT_PACKAGE_NAME,
 				Constants.POCKET_PAINT_INTENT_ACTIVITY_NAME));
@@ -520,7 +521,8 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 	}
 
 	public void addLookChooseImage() {
-		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_CHOOSE_IMAGE);
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_LOOK_FRAGMENT_CHOOSE_IMAGE,
+				this.getTag(), 0);
 		Intent intent = new Intent(Intent.ACTION_PICK);
 
 		Bundle bundleForPocketCode = new Bundle();

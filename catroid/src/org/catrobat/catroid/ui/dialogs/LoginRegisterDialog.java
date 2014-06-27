@@ -41,6 +41,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.transfers.RegistrationTask;
@@ -89,6 +91,7 @@ public class LoginRegisterDialog extends DialogFragment implements OnRegistratio
 				loginRegisterButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_LOGIN_REGISTER_DIALOG_LOGIN);
 						handleLoginRegisterButtonClick();
 					}
 				});
@@ -97,6 +100,7 @@ public class LoginRegisterDialog extends DialogFragment implements OnRegistratio
 				passwordForgottenButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_LOGIN_REGISTER_DIALOG_PASSWORD_FORGOTTEN);
 						handlePasswordForgottenButtonClick();
 					}
 				});

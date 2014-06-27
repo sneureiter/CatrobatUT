@@ -66,7 +66,7 @@ public class CopyProjectDialog extends TextDialog {
 
 	@Override
 	protected boolean handleOkButton() {
-		UmsAgent.onEvent(getActivity().getApplicationContext(), Constants.UMS_DIALOG_COPY_PROJECT_DIALOG_OK);
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_COPY_PROJECT_DIALOG_OK);
 		String newProjectName = (input.getText().toString()).trim();
 
 		if (newProjectName.equalsIgnoreCase("")) {
@@ -103,5 +103,17 @@ public class CopyProjectDialog extends TextDialog {
 	@Override
 	protected String getTitle() {
 		return getString(R.string.dialog_copy_project_title);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.catrobat.catroid.ui.dialogs.TextDialog#handleCancelButton()
+	 */
+	@Override
+	protected boolean handleCancelButton() {
+		// TODO Auto-generated method stub
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_COPY_PROJECT_DIALOG_CANCEL);
+		return false;
 	}
 }

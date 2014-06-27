@@ -30,13 +30,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.ui.controller.BackPackListManager;
 
 public class BaseActivity extends SherlockFragmentActivity {
@@ -60,9 +60,21 @@ public class BaseActivity extends SherlockFragmentActivity {
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		UmsAgent.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		UmsAgent.onResume(this);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
+				UmsAgent.onEvent(getBaseContext(), Constants.UMS_DIALOG_DELETE_SPRITE_DIALOG_NO);
 				Intent intent = new Intent(this, MainMenuActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				BackPackListManager.setBackPackFlag(true);
@@ -96,9 +108,9 @@ public class BaseActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		this.mDetector.onTouchEvent(ev);
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(getBaseContext(), this.getClass().getSimpleName().toString(), duration);
-		toast.show();
+		//int duration = Toast.LENGTH_SHORT;
+		//Toast toast = Toast.makeText(getBaseContext(), this.getClass().getSimpleName().toString(), duration);
+		//toast.show();
 		return super.dispatchTouchEvent(ev);
 	}
 

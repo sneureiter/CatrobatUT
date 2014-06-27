@@ -46,6 +46,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.ScreenValues;
 import org.catrobat.catroid.content.bricks.Brick;
@@ -203,7 +205,13 @@ public class DragAndDropListView extends ListView implements OnLongClickListener
 
 					dragTouchedListItem((int) event.getRawY());
 					dragItemInList(y, itemPosition);
-
+					if (itemPosition < previousItemPosition) {
+						UmsAgent.onEvent(getContext(),
+								org.catrobat.catroid.common.Constants.UMS_DRAG_AND_DROP_ACTION_DOWN);
+					} else {
+						UmsAgent.onEvent(getContext(),
+								org.catrobat.catroid.common.Constants.UMS_DRAG_AND_DROP_ACTION_UP);
+					}
 					dimBackground = true;
 					break;
 			}

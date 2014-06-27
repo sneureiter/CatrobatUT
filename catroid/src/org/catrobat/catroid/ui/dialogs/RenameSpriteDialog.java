@@ -25,8 +25,11 @@ package org.catrobat.catroid.ui.dialogs;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.ui.ScriptActivity;
 import org.catrobat.catroid.utils.Utils;
 
@@ -57,6 +60,7 @@ public class RenameSpriteDialog extends TextDialog {
 
 	@Override
 	protected boolean handleOkButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_RENAME_SPRITE_DIALOG_OK);
 		String newSpriteName = (input.getText().toString()).trim();
 		ProjectManager projectManager = ProjectManager.getInstance();
 
@@ -80,6 +84,14 @@ public class RenameSpriteDialog extends TextDialog {
 		}
 
 		return true;
+	}
+
+	@Override
+	protected boolean handleCancelButton() {
+
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_RENAME_SPRITE_DIALOG_CANCEL);
+		return true;
+
 	}
 
 	@Override

@@ -256,22 +256,27 @@ public class ProjectsListFragment extends SherlockListFragment implements OnProj
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.context_menu_copy:
+				UmsAgent.onEvent(getActivity(), Constants.UMS_CONTEXT_MENU_COPY, this.getTag(), 0);
 				showCopyProjectDialog();
 				break;
 
 			case R.id.context_menu_rename:
+				UmsAgent.onEvent(getActivity(), Constants.UMS_CONTEXT_MENU_RENAME, this.getTag(), 0);
 				showRenameDialog();
 				break;
 
 			case R.id.context_menu_delete:
+				UmsAgent.onEvent(getActivity(), Constants.UMS_CONTEXT_MENU_DELETE, this.getTag(), 0);
 				showConfirmDeleteDialog();
 				break;
 
 			case R.id.context_menu_set_description:
+				UmsAgent.onEvent(getActivity(), Constants.UMS_CONTEXT_MENU_SET_DESCRIPTION, this.getTag(), 0);
 				showSetDescriptionDialog();
 				break;
 
 			case R.id.context_menu_upload:
+				UmsAgent.onEvent(getActivity(), Constants.UMS_CONTEXT_MENU_UPLOAD, this.getTag(), 0);
 				ProjectManager.getInstance().uploadProject(projectToEdit.projectName, this.getActivity());
 				break;
 

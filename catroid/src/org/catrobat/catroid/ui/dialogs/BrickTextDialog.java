@@ -58,4 +58,5 @@ public abstract class BrickTextDialog extends TextDialog {
 		super.onOkButtonHandled();
 		getActivity().sendBroadcast(new Intent(ScriptActivity.ACTION_BRICK_LIST_CHANGED));
 	}
+
 }

@@ -43,6 +43,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.wbtech.ums.UmsAgent;
+import com.wbtech.ums.common.OwnerInfo;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -84,7 +85,9 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		UmsAgent.setUpdateOnlyWifi(false);
 		UmsAgent.onError(this);
 		UmsAgent.setDefaultReportPolicy(this, 1);
-		UmsAgent.bindUserIdentifier(this, "xd..");
+		String email = new OwnerInfo(this).email;
+		UmsAgent.bindUserIdentifier(this, email);
+		UmsAgent.postClientData(this);
 
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
@@ -115,7 +118,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	@Override
 	protected void onResume() {
 		super.onResume();
-		UmsAgent.onResume(this);
+		//UmsAgent.onResume(this);
 		if (!Utils.checkForExternalStorageAvailableAndDisplayErrorIfNot(this)) {
 			return;
 		}
@@ -136,7 +139,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	@Override
 	public void onPause() {
 		super.onPause();
-		UmsAgent.onPause(this);
+		//UmsAgent.onPause(this);
 		if (!Utils.externalStorageAvailable()) {
 			return;
 		}
@@ -158,14 +161,16 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_rate_app:
+				UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_OPTIONS_MENU_RATE_US);
 				launchMarket();
 				return true;
 			case R.id.menu_terms_of_use:
+				UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_OPTIONS_MENU_TERMS_OF_USE);
 				TermsOfUseDialogFragment termsOfUseDialog = new TermsOfUseDialogFragment();
 				termsOfUseDialog.show(getSupportFragmentManager(), TermsOfUseDialogFragment.DIALOG_FRAGMENT_TAG);
 				return true;
 			case R.id.menu_about:
-				UmsAgent.onEvent(MainMenuActivity.this, "test2");
+				UmsAgent.onEvent(MainMenuActivity.this, Constants.UMS_OPTIONS_MENU_ABOUT);
 				AboutDialogFragment aboutDialog = new AboutDialogFragment();
 				aboutDialog.show(getSupportFragmentManager(), AboutDialogFragment.DIALOG_FRAGMENT_TAG);
 				return true;
@@ -191,6 +196,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 	}
 
 	public void handleContinueButton() {
+		UmsAgent.onEvent(this, Constants.UMS_MAIN_MENU_ACTIVITY_CONTINUE);
 		Intent intent = new Intent(this, ProjectActivity.class);
 		intent.putExtra(Constants.PROJECTNAME_TO_LOAD, Utils.getCurrentProjectName(this));
 		startActivity(intent);

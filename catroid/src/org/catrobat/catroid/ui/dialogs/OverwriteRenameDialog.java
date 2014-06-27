@@ -41,8 +41,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.utils.DownloadUtil;
 import org.catrobat.catroid.utils.Utils;
 
@@ -91,10 +94,12 @@ public class OverwriteRenameDialog extends DialogFragment implements OnClickList
 				.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_OVERWRITE_RENAME_DIALOG_OK);
 					}
 				}).setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_OVERWRITE_RENAME_DIALOG_CANCEL);
 						Toast.makeText(context, R.string.notification_download_project_cancel, Toast.LENGTH_SHORT)
 								.show();
 					}

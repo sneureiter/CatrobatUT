@@ -212,48 +212,48 @@ public class ScriptActivity extends BaseActivity {
 
 		switch (item.getItemId()) {
 			case R.id.backpack:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_RENAME);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_RENAME, currentFragmentTag, 0);
 				currentFragment.startBackPackActionMode();
 				break;
 
 			case R.id.show_details:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_SHOW_DETAILS);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_SHOW_DETAILS, currentFragmentTag, 0);
 				handleShowDetails(!currentFragment.getShowDetails(), item);
 				break;
 
 			case R.id.copy:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_COPY);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_COPY, currentFragmentTag, 0);
 				currentFragment.startCopyActionMode();
 				break;
 
 			case R.id.cut:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_CUT);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_CUT, currentFragmentTag, 0);
 				break;
 
 			case R.id.unpacking:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_UNPACKING);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_UNPACKING, currentFragmentTag, 0);
 				Intent intent = new Intent(currentFragment.getActivity(), BackPackActivity.class);
 				intent.putExtra(BackPackActivity.EXTRA_FRAGMENT_POSITION, FRAGMENT_SOUNDS);
 				startActivity(intent);
 				break;
 
 			case R.id.insert_below:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_INSERT_BELOW);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_INSERT_BELOW, currentFragmentTag, 0);
 				break;
 
 			case R.id.move:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_MOVE);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_MOVE, currentFragmentTag, 0);
 				break;
 
 			case R.id.rename:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_RENAME);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_RENAME, currentFragmentTag, 0);
 				if (currentFragmentPosition != FRAGMENT_SCRIPTS) {
 					currentFragment.startRenameActionMode();
 				}
 				break;
 
 			case R.id.delete:
-				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_DELETE);
+				UmsAgent.onEvent(ScriptActivity.this, Constants.UMS_OPTIONS_MENU_DELETE, currentFragmentTag, 0);
 				currentFragment.startDeleteActionMode();
 				break;
 		}
@@ -349,6 +349,8 @@ public class ScriptActivity extends BaseActivity {
 	}
 
 	public void handleAddButton(View view) {
+		UmsAgent.onEvent(getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_SCRIPT_FRAGMENT_NEW_SCRIPT_BUTTON,
+				currentFragmentTag, 0);
 		if (!viewSwitchLock.tryLock()) {
 			return;
 		}
@@ -356,6 +358,8 @@ public class ScriptActivity extends BaseActivity {
 	}
 
 	public void handlePlayButton(View view) {
+		UmsAgent.onEvent(getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_SCRIPT_FRAGMENT_PLAY_BUTTON,
+				currentFragmentTag, 0);
 		updateHandleAddButtonClickListener();
 
 		Fragment formulaEditorFragment = fragmentManager

@@ -261,29 +261,30 @@ public class SpritesListFragment extends SherlockListFragment implements OnSprit
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.context_menu_copy:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY, this.getTag(), 0);
 				copySprite();
 				break;
 
 			case R.id.context_menu_cut:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT, this.getTag(), 0);
 				break;
 
 			case R.id.context_menu_insert_below:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW,
+						this.getTag(), 0);
 				break;
 
 			case R.id.context_menu_move:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE, this.getTag(), 0);
 				break;
 
 			case R.id.context_menu_rename:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME, this.getTag(), 0);
 				showRenameDialog();
 				break;
 
 			case R.id.context_menu_delete:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE, this.getTag(), 0);
 				showConfirmDeleteDialog();
 				break;
 
@@ -330,6 +331,7 @@ public class SpritesListFragment extends SherlockListFragment implements OnSprit
 
 	@Override
 	public void onSpriteEdit(int position) {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_PROJECT_ACTIVITY_EDIT_SPRIT);
 		ProjectManager.getInstance().setCurrentSprite(spriteAdapter.getItem(position));
 		Intent intent = new Intent(getActivity(), ProgramMenuActivity.class);
 		startActivity(intent);
@@ -422,6 +424,8 @@ public class SpritesListFragment extends SherlockListFragment implements OnSprit
 		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_DIALOG_DELETE_SPRITE_DIALOG_YES,
+						getTag(), 0);
 				deleteCheckedSprites();
 				clearCheckedSpritesAndEnableButtons();
 			}
@@ -429,6 +433,8 @@ public class SpritesListFragment extends SherlockListFragment implements OnSprit
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_DIALOG_DELETE_SPRITE_DIALOG_NO,
+						getTag(), 0);
 				dialog.cancel();
 				clearCheckedSpritesAndEnableButtons();
 			}

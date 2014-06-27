@@ -492,7 +492,7 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 		switch (item.getItemId()) {
 
 			case R.id.context_menu_backpack:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_BACKPACK);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_BACKPACK, this.getTag(), 0);
 				Intent intent = new Intent(getActivity(), BackPackActivity.class);
 				intent.putExtra(BackPackActivity.EXTRA_FRAGMENT_POSITION, 2);
 				intent.putExtra(BackPackActivity.BACKPACK_ITEM, true);
@@ -502,7 +502,7 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 				break;
 
 			case R.id.context_menu_copy:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_COPY, this.getTag(), 0);
 				SoundInfo newSoundInfo = SoundController.getInstance().copySound(selectedSoundInfo, soundInfoList,
 						adapter);
 				updateSoundAdapter(newSoundInfo);
@@ -510,24 +510,25 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 				break;
 
 			case R.id.context_menu_cut:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_CUT, this.getTag(), 0);
 				break;
 
 			case R.id.context_menu_insert_below:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_INSERT_BELOW,
+						this.getTag(), 0);
 				break;
 
 			case R.id.context_menu_move:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_MOVE, this.getTag(), 0);
 				break;
 
 			case R.id.context_menu_rename:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_RENAME, this.getTag(), 0);
 				showRenameDialog();
 				break;
 
 			case R.id.context_menu_delete:
-				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE);
+				UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_CONTEXT_MENU_DELETE, this.getTag(), 0);
 				showConfirmDeleteDialog();
 				break;
 		}
@@ -592,6 +593,8 @@ public class SoundFragment extends ScriptActivityFragment implements SoundBaseAd
 
 	@Override
 	public void handleAddButton() {
+		UmsAgent.onEvent(getActivity().getBaseContext(), Constants.UMS_SCRIPT_ACTIVITY_SOUND_FRAGMENT_NEW_SOUND_DIALOG,
+				this.getTag(), 0);
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		intent.setType("audio/*");
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

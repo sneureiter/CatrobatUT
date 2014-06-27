@@ -43,6 +43,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.wbtech.ums.UmsAgent;
@@ -137,6 +138,20 @@ public class NewProjectDialog extends DialogFragment {
 
 		emptyProjectCheckBox = (CheckBox) dialogView.findViewById(R.id.project_empty_checkbox);
 		emptyProjectCheckBox.setChecked(shouldBeEmpty);
+		emptyProjectCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					UmsAgent.onEvent(getActivity(),
+							Constants.UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CREATE_EMPTY_PROJECT_TRUE);
+				} else {
+					UmsAgent.onEvent(getActivity(),
+							Constants.UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CREATE_EMPTY_PROJECT_FALSE);
+				}
+
+			}
+		});
 
 		return newProjectDialog;
 	}

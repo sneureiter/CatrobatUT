@@ -29,7 +29,10 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.R;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.ui.ScriptActivity;
 import org.catrobat.catroid.utils.Utils;
 
@@ -60,6 +63,7 @@ public class RenameLookDialog extends TextDialog {
 
 	@Override
 	protected boolean handleOkButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_RENAME_LOOK_DIALOG_OK);
 		String newLookName = input.getText().toString().trim();
 
 		if (newLookName.equals(oldLookName)) {
@@ -111,5 +115,16 @@ public class RenameLookDialog extends TextDialog {
 			public void afterTextChanged(Editable s) {
 			}
 		};
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.catrobat.catroid.ui.dialogs.TextDialog#handleCancelButton()
+	 */
+	@Override
+	protected boolean handleCancelButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_RENAME_LOOK_DIALOG_CANCEL);
+		return false;
 	}
 }

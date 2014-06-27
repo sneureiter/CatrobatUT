@@ -43,6 +43,7 @@ import android.widget.ListView;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.wbtech.ums.UmsAgent;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
@@ -181,6 +182,7 @@ public class ScriptFragment extends ScriptActivityFragment implements OnCategory
 
 	@Override
 	public void onCategorySelected(String category) {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_SCRIPT_ACTIVITY_FRAGMENT_CATEGORY + category);
 		AddBrickFragment addBrickFragment = AddBrickFragment.newInstance(category, this);
 		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -192,6 +194,7 @@ public class ScriptFragment extends ScriptActivityFragment implements OnCategory
 	}
 
 	public void updateAdapterAfterAddNewBrick(Brick brickToBeAdded) {
+		UmsAgent.onEvent(getActivity(), brickToBeAdded.getClass().getSimpleName());
 		int firstVisibleBrick = listView.getFirstVisiblePosition();
 		int lastVisibleBrick = listView.getLastVisiblePosition();
 		int position = ((1 + lastVisibleBrick - firstVisibleBrick) / 2);

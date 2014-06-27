@@ -224,6 +224,12 @@ public class BroadcastReceiverBrick extends ScriptBrick implements BroadcastMess
 			protected String getTitle() {
 				return getString(R.string.dialog_new_broadcast_message_title);
 			}
+
+			@Override
+			protected boolean handleCancelButton() {
+				// TODO Auto-generated method stub
+				return false;
+			}
 		};
 
 		editDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "dialog_broadcast_brick");

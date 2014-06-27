@@ -116,10 +116,14 @@ public final class Constants {
 	public static String UMS_PROJECT_ACTIVITY_SHOW_DETAILS_MENU = "ProjectActivityShowDetailsMenu";
 	public static String UMS_PROJECT_ACTIVITY_UPLOAD_MENU = "ProjectActivityUploadMenu";
 
+	public static String UMS_PROJECT_ACTIVITY_EDIT_SPRIT = "ProjectActivityEditSprit";
+
 	//MainMenuActivityNewProjectDialog
 
 	public static String UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_OK_BUTTON = "NewProjectDialogOkButton";
 	public static String UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CANCEL_BUTTON = "NewProjectDialogCancelButton";
+	public static String UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CREATE_EMPTY_PROJECT_TRUE = "NewProjectDialogCreateEmptyProjectTrue";
+	public static String UMS_PROJECT_ACTIVITY_NEW_PROJECT_DIALOG_CREATE_EMPTY_PROJECT_FALSE = "NewProjectDialogCreateEmptyProjectFalse";
 
 	//MyProjectsActivity +  ProjectsListFragment
 	public static String UMS_MY_PROJECTS_ACTIVITY_ADD_BUTTON = "MyProjectsActivityAddButton";
@@ -151,15 +155,59 @@ public final class Constants {
 	public static String UMS_SCRIPT_ACTIVITY_SOUND_FRAGMENT_PLAY_Button = "ScriptActivitySoundFragmentPlayButton";
 	public static String UMS_SCRIPT_ACTIVITY_SOUND_FRAGMENT_PLAY_SOUND = "ScriptActivitySoundFragmentPlaySound";
 
+	//ScriptActivity - Script Fragment
+	public static String UMS_SCRIPT_ACTIVITY_SCRIPT_FRAGMENT_NEW_SCRIPT_BUTTON = "ScriptActivityScriptFragmentNewScriptButton";
+	public static String UMS_SCRIPT_ACTIVITY_SCRIPT_FRAGMENT_PLAY_BUTTON = "ScriptActivityScriptFragmentPlayButton";
 	//Dialogs
 
 	public static String UMS_DIALOG_ABOUT_DIALOG_OK = "AboutDialogOk";
+	public static String UMS_DIALOG_TERMS_OF_USE_OK = "TermsOfUseDialogOk";
 	public static String UMS_DIALOG_COPY_PROJECT_DIALOG_OK = "CopyProjectDialogOk";
 	public static String UMS_DIALOG_COPY_PROJECT_DIALOG_CANCEL = "CopyProjectDialogCancel";
 	public static String UMS_DIALOG_DELETE_LOOK_DIALOG_YES = "DeleteLookDialogYes";
 	public static String UMS_DIALOG_DELETE_LOOK_DIALOG_NO = "DeleteLookDialogNo";
 	public static String UMS_DIALOG_DELETE_SOUND_DIALOG_YES = "DeleteSoundDialogYes";
 	public static String UMS_DIALOG_DELETE_SOUND_DIALOG_NO = "DeleteSoundDialogNo";
+
+	public static String UMS_DIALOG_RENAME_SPRITE_OK = "RenameSpriteDialogOk";
+	public static String UMS_DIALOG_RENAME_SPRITE_CANCEL = "RenameSpriteDialogCancel";
+
+	public static String UMS_DIALOG_LOGIN_REGISTER_DIALOG_LOGIN = "LoginRegisterDialogLoginOrRegister";
+	public static String UMS_DIALOG_LOGIN_REGISTER_DIALOG_PASSWORD_FORGOTTEN = "LoginRegisterDialogPasswordForgotten";
+
+	public static String UMS_DIALOG_NEW_VARIABLE_DIALOG_OK = "NewVariableDialogOK";
+	public static String UMS_DIALOG_NEW_VARIABLE_DIALOG_CANCEL = "NewVariableDialogCancel";
+	public static String UMS_DIALOG_NEW_VARIABLE_DIALOG_LOCAL_VARIABLE = "NewVariableDialogForAllObjects";
+	public static String UMS_DIALOG_NEW_VARIABLE_DIALOG_GLOBAL_VARIABLE = "NewVariableDialogForThisObjectOnly";
+
+	public static String UMS_DIALOG_OVERWRITE_RENAME_DIALOG_OK = "OverwriteRenameDialogOk";
+	public static String UMS_DIALOG_OVERWRITE_RENAME_DIALOG_CANCEL = "OverwriteRenameDialogCancel";
+
+	public static String UMS_DIALOG_RENAME_LOOK_DIALOG_OK = "RenameLookDialogOK";
+	public static String UMS_DIALOG_RENAME_LOOK_DIALOG_CANCEL = "RenameLookDialogCancel";
+
+	public static String UMS_DIALOG_RENAME_PROJECT_DIALOG_OK = "RenameProjectDialogOk";
+	public static String UMS_DIALOG_RENAME_PROJECT_DIALOG_CANCEL = "RenameProjectDialogCancel";
+
+	public static String UMS_DIALOG_RENAME_SOUND_DIALOG_OK = "RenameSoundDialogOk";
+	public static String UMS_DIALOG_RENAME_SOUND_DIALOG_CANCEL = "RenameSoundDialogCancel";
+
+	public static String UMS_DIALOG_RENAME_SPRITE_DIALOG_OK = "RenameSpriteDialogOk";
+	public static String UMS_DIALOG_RENAME_SPRITE_DIALOG_CANCEL = "RenameSpriteDialogCancel";
+
+	public static String UMS_DIALOG_SET_DESCRIPTION_DIALOG_OK = "SetDescriptionDialogOk";
+	public static String UMS_DIALOG_SET_DESCRIPTION_DIALOG_CANCEL = "SetDescriptionDialogCancel";
+
+	public static String UMS_DIALOG_STAGE_DIALOG_BACK = "StageDialogBack";
+	public static String UMS_DIALOG_STAGE_DIALOG_CONTINUE = "StageDialogContinue";
+	public static String UMS_DIALOG_STAGE_DIALOG_RESTART = "StageDialogRestart";
+	public static String UMS_DIALOG_STAGE_DIALOG_TOGGLE_AXES = "StageDialogToggleAxes";
+	public static String UMS_DIALOG_STAGE_DIALOG_MAXIMIZE = "StageDialogMaximize";
+	public static String UMS_DIALOG_STAGE_DIALOG_SCREENSHOT = "StageDialogScreenshot";
+	public static String UMS_DIALOG_STAGE_DIALOG_UNIMPLEMENTED = "StageDialogUnimplemented";
+
+	public static String UMS_DIALOG_DELETE_SPRITE_DIALOG_YES = "DeleteSpriteDialogYes";
+	public static String UMS_DIALOG_DELETE_SPRITE_DIALOG_NO = "DeleteSpriteDialogNo";
 
 	//Optionsmenu
 
@@ -173,6 +221,11 @@ public final class Constants {
 	public static String UMS_OPTIONS_MENU_UPLOAD = "OptionsMenuUpload";
 	public static String UMS_OPTIONS_MENU_UNPACKING = "OptionsMenuUnpacking";
 	public static String UMS_OPTIONS_MENU_BACKPACK = "OptionsMenuBackpack";
+	public static String UMS_OPTIONS_MENU_TERMS_OF_USE = "OptionsMenuTermsOfUse";
+	public static String UMS_OPTIONS_MENU_RATE_US = "OptionsMenuRateUs";
+	public static String UMS_OPTIONS_MENU_ABOUT = "OptionsMenuAboutPocketCode";
+	static String UMS_OPTINS_MENU_HOME = "OptionsMenuHome";
+	public static String UMS_OPTIONS_MENU_SETTINGS = "OptionsMenuSettings";
 
 	//Contextmenu
 	//public static String UMS_CONTEXT_MENU_SHOW_DETAILS = "OptionsMenuShowDetails";
@@ -184,5 +237,14 @@ public final class Constants {
 	public static String UMS_CONTEXT_MENU_DELETE = "ContextMenuDelete";
 	public static String UMS_CONTEXT_MENU_BACKPACK = "ContextMenuBackpack";
 	//public static String UMS_CONTEXT_MENU_UPLOAD = "OptionsMenuUpload";
+
+	public static String UMS_CONTEXT_MENU_SET_DESCRIPTION = "ContextMenuDescription";
+
+	public static String UMS_CONTEXT_MENU_UPLOAD = "ContextMenuUpload";
+
+	public static String UMS_SCRIPT_ACTIVITY_FRAGMENT_CATEGORY = "ScriptCategory";
+
+	public static String UMS_DRAG_AND_DROP_ACTION_UP = "ListDragAndDropUp";
+	public static String UMS_DRAG_AND_DROP_ACTION_DOWN = "ListDragAndDropDown";
 
 }

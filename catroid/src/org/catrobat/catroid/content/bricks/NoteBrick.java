@@ -151,6 +151,12 @@ public class NoteBrick extends BrickBaseType {
 					protected String getTitle() {
 						return getString(R.string.dialog_edit_note_title);
 					}
+
+					@Override
+					protected boolean handleCancelButton() {
+						// TODO Auto-generated method stub
+						return false;
+					}
 				};
 
 				editDialog.show(activity.getSupportFragmentManager(), "dialog_note_brick");

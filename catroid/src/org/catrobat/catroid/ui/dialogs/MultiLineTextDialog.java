@@ -74,6 +74,7 @@ public abstract class MultiLineTextDialog extends DialogFragment {
 				.setNegativeButton(R.string.cancel_button, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						handleCancelButton();
 						dismiss();
 					}
 				}).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -105,6 +106,8 @@ public abstract class MultiLineTextDialog extends DialogFragment {
 	protected abstract void initialize();
 
 	protected abstract boolean handleOkButton();
+
+	protected abstract boolean handleCancelButton();
 
 	protected abstract String getTitle();
 

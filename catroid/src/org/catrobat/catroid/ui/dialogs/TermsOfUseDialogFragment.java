@@ -33,6 +33,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 
@@ -51,10 +53,12 @@ public class TermsOfUseDialogFragment extends DialogFragment {
 
 		termsOfUseUrlTextView.setText(Html.fromHtml(termsOfUseUrl));
 
-		Dialog termsOfUseDialog = new AlertDialog.Builder(getActivity()).setView(view).setTitle(R.string.dialog_terms_of_use_title)
+		Dialog termsOfUseDialog = new AlertDialog.Builder(getActivity()).setView(view)
+				.setTitle(R.string.dialog_terms_of_use_title)
 				.setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
+						UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_TERMS_OF_USE_OK);
 						dialog.cancel();
 					}
 				}).create();

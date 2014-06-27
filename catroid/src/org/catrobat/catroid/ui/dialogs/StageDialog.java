@@ -34,9 +34,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.BroadcastSequenceMap;
 import org.catrobat.catroid.common.BroadcastWaitSequenceMap;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.stage.StageListener;
 
@@ -82,27 +85,34 @@ public class StageDialog extends Dialog implements View.OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.stage_dialog_button_back:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_BACK);
 				onBackPressed();
 				break;
 			case R.id.stage_dialog_button_continue:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_CONTINUE);
 				dismiss();
 				stageActivity.resume();
 				break;
 			case R.id.stage_dialog_button_restart:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_RESTART);
 				clearBroadcastMaps();
 				dismiss();
 				restartProject();
 				break;
 			case R.id.stage_dialog_button_toggle_axes:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_RESTART);
 				toggleAxes();
 				break;
 			case R.id.stage_dialog_button_maximize:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_MAXIMIZE);
 				stageListener.toggleScreenMode();
 				break;
 			case R.id.stage_dialog_button_screenshot:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_SCREENSHOT);
 				makeScreenshot();
 				break;
 			default:
+				UmsAgent.onEvent(getContext(), Constants.UMS_DIALOG_STAGE_DIALOG_UNIMPLEMENTED);
 				Log.w("CATROID", "Unimplemented button clicked! This shouldn't happen!");
 				break;
 		}

@@ -24,6 +24,8 @@ package org.catrobat.catroid.ui.dialogs;
 
 import android.os.Bundle;
 
+import com.wbtech.ums.UmsAgent;
+
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
@@ -61,6 +63,7 @@ public class RenameProjectDialog extends TextDialog {
 
 	@Override
 	protected boolean handleOkButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_RENAME_PROJECT_DIALOG_OK);
 		String newProjectName = input.getText().toString().trim();
 
 		if (newProjectName.equalsIgnoreCase("")) {
@@ -120,5 +123,16 @@ public class RenameProjectDialog extends TextDialog {
 
 		void onProjectRename(boolean isCurrentProject);
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.catrobat.catroid.ui.dialogs.TextDialog#handleCancelButton()
+	 */
+	@Override
+	protected boolean handleCancelButton() {
+		UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_RENAME_PROJECT_DIALOG_CANCEL);
+		return false;
 	}
 }
