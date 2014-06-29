@@ -34,6 +34,7 @@ import org.catrobat.catroid.ui.MainMenuActivity;
 
 public final class StatusBarNotificationManager {
 	public static final String EXTRA_PROJECT_NAME = "projectName";
+	public static final int MAXIMUM_PERCENT = 100;
 
 	private static final StatusBarNotificationManager INSTANCE = new StatusBarNotificationManager();
 
@@ -67,7 +68,7 @@ public final class StatusBarNotificationManager {
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, uploadIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
-		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_launcher, programName,
+		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
 				R.string.notification_upload_title_pending, R.string.notification_upload_title_finished,
 				R.string.notification_upload_pending, R.string.notification_upload_finished);
 
@@ -89,7 +90,7 @@ public final class StatusBarNotificationManager {
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, copyIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
-		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_launcher, programName,
+		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
 				R.string.notification_copy_title_pending, R.string.notification_title_open,
 				R.string.notification_copy_pending, R.string.notification_copy_finished);
 
@@ -111,7 +112,7 @@ public final class StatusBarNotificationManager {
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, downloadIntent,
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
-		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_launcher, programName,
+		NotificationData data = new NotificationData(context, pendingIntent, R.drawable.ic_stat, programName,
 				R.string.notification_download_title_pending, R.string.notification_title_open,
 				R.string.notification_download_pending, R.string.notification_download_finished);
 
@@ -151,6 +152,17 @@ public final class StatusBarNotificationManager {
 					.setAutoCancel(true).setContentIntent(notificationData.getPendingIntent()).setOngoing(false);
 			notificationManager.notify(id, notificationBuilder.build());
 		}
+	}
+	public void abortProgressNotificationWithMessage(int id, String changeDoneText){
+
+		NotificationData notificationData = notificationDataMap.get(id);
+		if (notificationData == null) {
+			return;
+		}
+		notificationData.setNotificationTextDone(changeDoneText);
+		notificationDataMap.put(id, notificationData);
+
+		showOrUpdateNotification(id, MAXIMUM_PERCENT);
 	}
 
 	public void cancelNotification(int id) {

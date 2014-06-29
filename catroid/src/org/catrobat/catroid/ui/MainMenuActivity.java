@@ -113,6 +113,12 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		if (!BackPackListManager.isBackpackFlag()) {
 			BackPackListManager.getInstance().setSoundInfoArrayListEmpty();
 		}
+
+		//TODO Drone do not create project for now
+		//if (BuildConfig.FEATURE_PARROT_AR_DRONE_ENABLED && DroneUtils.isDroneSharedPreferenceEnabled(getApplication(), false)) {
+		//	UtilFile.loadExistingOrCreateStandardDroneProject(this);
+		//}
+		//SettingsActivity.setTermsOfServiceAgreedPermanently(this, false);
 	}
 
 	@Override
@@ -126,6 +132,7 @@ public class MainMenuActivity extends BaseActivity implements OnLoadProjectCompl
 		findViewById(R.id.progress_circle).setVisibility(View.GONE);
 
 		UtilFile.createStandardProjectIfRootDirectoryIsEmpty(this);
+
 		PreStageActivity.shutdownPersistentResources();
 		setMainMenuButtonContinueText();
 		findViewById(R.id.main_menu_button_continue).setEnabled(true);

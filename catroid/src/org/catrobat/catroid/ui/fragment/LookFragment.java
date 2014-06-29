@@ -281,7 +281,7 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 		menu.findItem(R.id.settings).setVisible(true);
 
 		boolean visibility = false;
-		if (BuildConfig.DEBUG) {
+		if (BuildConfig.FEATURE_BACKPACK_ENABLED) {
 			visibility = true;
 		}
 		menu.findItem(R.id.backpack).setVisible(visibility);
@@ -750,6 +750,13 @@ public class LookFragment extends ScriptActivityFragment implements OnLookEditLi
 			public void onClick(DialogInterface dialog, int id) {
 				UmsAgent.onEvent(getActivity(), Constants.UMS_DIALOG_DELETE_LOOK_DIALOG_NO);
 				dialog.cancel();
+			}
+		});
+
+		builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+			@Override
+			public void onCancel(DialogInterface dialog) {
 				clearCheckedLooksAndEnableButtons();
 			}
 		});
